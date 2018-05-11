@@ -1,7 +1,6 @@
 library(ggplot2)
 library(dplyr)
 library(geojsonio)
-library(stringr)
 
 #data
 mp2017 <- read.csv("https://raw.githubusercontent.com/OPORA/rada/master/subventions/subventions2017/MPs2017.csv",
