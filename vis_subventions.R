@@ -7,7 +7,7 @@ library(stringr)
 mp2017 <- read.csv("https://raw.githubusercontent.com/OPORA/rada/master/subventions/subventions2017/MPs2017.csv",
                    stringsAsFactors = F)
 
-#сonstituency иoundaries
+#constituency boundaries
 okrug <- rgdal::readOGR("elections_districts.geojson")
 okrug <- fortify(okrug, region = "id")
 okrug <- okrug %>% 
@@ -44,7 +44,8 @@ scale_fill_manual(breaks = c(1, 2, 3, 4, 5, 6, 7,8),
                       '4' = '#74c476', 
                       '3' = '#a1d99b', 
                       '2' = '#c7e9c0',
-                      '1' = '#f7fcf5'))+
+                      '1' = '#f7fcf5')
+                 )+
 guides(fill = guide_legend(
     title = "Загальна сума субвенцій",
     title.position = "top",
@@ -54,12 +55,14 @@ guides(fill = guide_legend(
     label.hjust = 0.5,
     nrow = 1,
     keywidth = 12,
-    keyheight = 1.2))+
+    keyheight = 1.2)
+      )+
   
 labs(title = "Розподіл субвенцій по округах | 2017")+
 coord_map(projection = "mercator", 
           xlim = range(map2017$long), ylim = range(map2017$lat),
-          orientation = c(95, 0, 0))+
+          orientation = c(95, 0, 0)
+         )+
 theme_minimal(base_family = "Ubuntu Medium")+
   theme(text = element_text(color = "#3A3F4A"),
         panel.grid.major = element_blank(),
