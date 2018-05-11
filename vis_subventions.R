@@ -3,21 +3,20 @@ library(dplyr)
 library(geojsonio)
 library(stringr)
 
-#Дані по субвенціях
+#data
 mp2017 <- read.csv("https://raw.githubusercontent.com/OPORA/rada/master/subventions/subventions2017/MPs2017.csv",
                    stringsAsFactors = F)
 
-#Межі округів
+#сonstituency иoundaries
 okrug <- rgdal::readOGR("elections_districts.geojson")
 okrug <- fortify(okrug, region = "id")
 okrug <- okrug %>% 
   mutate(smd = as.numeric(okrug$id))
 
-#об'єднуємо
 map2017 <- full_join(okrug, mp2017, by ="smd")
 map2017[is.na(map2017)] <- 0
 
-#класифікуємо
+#classify
 map2017$class = case_when(
   map2017$smd %in% c(0:10,41,42,43,44,51,54,55,56,61,104,105,108,109,110,111,224,225) ~ '8',
   between(map2017$sum, 50, 100) ~ '7',
@@ -29,7 +28,7 @@ map2017$class = case_when(
   between(map2017$sum, 0, 0) ~ '1'
 )
 
-#робимо карту
+#create map
 png("sub_map_okrug2017.png", height = 1400, width = 1665)
 
 ggplot(map2017)+
