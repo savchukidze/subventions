@@ -33,7 +33,7 @@ png("sub_map_okrug2017.png", height = 1400, width = 1665)
 ggplot(map2017)+
   geom_polygon(aes(long, lat, group = group, fill = map2017$class), 
                color = "black", size = 0.5)+
-scale_fill_manual(breaks = c(1, 2, 3, 4, 5, 6, 7,8),
+scale_fill_manual(breaks = c(1, 2, 3, 4, 5, 6, 7, 8),
                   labels = paste(c("0 грн ", "0-10 млн грн", "10-20 млн грн", "20-30 млн грн", "30-40 млн грн","40-50 млн грн", "понад 50 млн грн", "округи на ТОТ")),
                   values = c(
                       '8' = "#d9d9d9",
